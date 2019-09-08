@@ -37,7 +37,7 @@ public class RestClient {
       this.setStatus(responseEntity.getStatusCode());
       return responseEntity.getBody();
     } catch (HttpServerErrorException e) {
-      LOG.severe(e.getMessage());
+      // LOG.severe(e.getMessage());
       LOG.severe(e.getResponseBodyAsString());
       LOG.severe(e.getResponseHeaders().toString());
       LOG.severe(requestEntity.toString());
