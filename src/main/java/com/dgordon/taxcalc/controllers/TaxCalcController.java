@@ -34,7 +34,7 @@ public class TaxCalcController {
         returnData = client.post(clientJson.getJsonObject("path").get("year").toString(), clientJson.get("body").toString()) ;
 
         LOG.info( sb.append("data to return: ").append(returnData).toString() );
-        sb = new StringBuilder()
+        sb = new StringBuilder();
 
         return new ResponseEntity<>(returnData, HttpStatus.ACCEPTED);
     }
