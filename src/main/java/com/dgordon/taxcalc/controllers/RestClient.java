@@ -32,7 +32,7 @@ public class RestClient {
   public String post(String uri, String body) {
     
     LOG.info( (new StringBuilder()).append("recieved request data, uri: "). append(uri).append(" \nbody: ").append(body).toString() );
-    HttpEntity<String> requestEntity = new HttpEntity<String>(body, headers);
+    HttpEntity<String> requestEntity = new HttpEntity<String>("state=WI&filing_status=single&pay_rate=40000&pay_periods=26&exemptions=3", headers);
     try {
       ResponseEntity<String> responseEntity = rest.exchange(server + "2019", HttpMethod.POST, requestEntity, String.class);
       this.setStatus(responseEntity.getStatusCode());
