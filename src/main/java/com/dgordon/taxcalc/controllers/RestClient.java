@@ -32,7 +32,8 @@ public class RestClient {
   public String post(String uri, String body) {
     
     LOG.info( (new StringBuilder()).append("recieved request data, uri: "). append(uri).append(" \nbody: ").append(body).toString() );
-    HttpEntity<String> requestEntity = new HttpEntity<String>(new String(body), headers);
+    HttpEntity<String> requestEntity = new HttpEntity<String>(body, headers);
+    LOG.info(requestEntity.getBody());
     try {
       ResponseEntity<String> responseEntity = rest.exchange(server + "2019", HttpMethod.POST, requestEntity, String.class);
       this.setStatus(responseEntity.getStatusCode());
