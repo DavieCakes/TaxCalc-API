@@ -2,6 +2,7 @@ package com.dgordon.taxcalc.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +20,7 @@ import javax.json.*;
 public class TaxCalcController {
     private static final Logger LOG = Logger.getLogger(TaxCalcController.class.getName());
 
+    @CrossOrigin() // by default allows all origins
     @RequestMapping(method = RequestMethod.POST, value = "/api")
     public ResponseEntity<?> testJSON(@RequestBody String input) {
 
