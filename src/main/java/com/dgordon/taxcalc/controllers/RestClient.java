@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -36,7 +37,7 @@ public class RestClient {
       ResponseEntity<String> responseEntity = rest.exchange(server + "2019", HttpMethod.POST, requestEntity, String.class);
       this.setStatus(responseEntity.getStatusCode());
       return responseEntity.getBody();
-    } catch (HttpServerErrorException e) {
+    } catch (HttpServerErrorException | HttpClientErrorException e) {
       // LOG.severe(e.getMessage());
       LOG.severe(e.getResponseBodyAsString());
       LOG.severe(e.getResponseHeaders().toString());
