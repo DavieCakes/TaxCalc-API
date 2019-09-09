@@ -33,11 +33,33 @@ public class TaxCalcController {
         sb = new StringBuilder();
 
         RestClient client = new RestClient();
-        returnData = client.post(clientJson.getJsonObject("path").get("year").toString(), clientJson.get("body").toString()) ;
 
+        // assert required parameters are in client json
+        if(!checkParameters(clientJson) ) {
+            return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
+        }
+
+        // send post request to Tax API
+        returnData = client.post(clientJson.toString()) ;
+
+        // Log response data from Tax API
         LOG.info( sb.append("data to return: ").append(returnData).toString() );
         sb = new StringBuilder();
 
         return new ResponseEntity<>(returnData, HttpStatus.ACCEPTED);
+    }
+
+    private static boolean checkParameters(JsonObject json) {
+        if (
+            json.get("state") == null ||
+            json.get("filing_status") == null ||
+            json.get("pay_rate") == null ||
+            json.get("pay_periods") == null ||
+            json.get("exemptions") == null
+        ) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

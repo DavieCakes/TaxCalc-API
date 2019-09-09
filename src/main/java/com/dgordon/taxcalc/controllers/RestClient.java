@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 public class RestClient {
 
-  private String server = "https://taxee.io/api/v2/calculate/";
+  private String server = "https://taxee.io/api/v2/calculate/2019";
   private RestTemplate rest;
   private HttpHeaders headers;
   private HttpStatus status;
@@ -23,19 +23,19 @@ public class RestClient {
   public RestClient() {
     this.rest = new RestTemplate();
     this.headers = new HttpHeaders();
-    // headers.add("Content-Type", "application/json");
-    headers.add("Content-Type", "application/x-www-form-urlencoded");
+    headers.add("Content-Type", "application/json");
+    // headers.add("Content-Type", "application/x-www-form-urlencoded");
     // headers.add("Accept", "*/*");
     headers.add("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUElfS0VZX01BTkFHRVIiLCJodHRwOi8vdGF4ZWUuaW8vdXNlcl9pZCI6IjVkNzJmNGY3NDRmMzYwMWEyODMwYjJhYiIsImh0dHA6Ly90YXhlZS5pby9zY29wZXMiOlsiYXBpIl0sImlhdCI6MTU2NzgxNDkwM30.FiVjGqO_HrHtODYLUBqbtnQm48sVxGPYRyTrzWSobks");
   }
 
-  public String post(String uri, String body) {
+  public String post(String body) {
     
-    LOG.info( (new StringBuilder()).append("recieved request data, uri: "). append(uri).append(" \nbody: ").append(body).toString() );
+    LOG.info( (new StringBuilder()).append("recieved request data: ").append(body).toString() );
     HttpEntity<String> requestEntity = new HttpEntity<String>(body, headers);
     LOG.info(requestEntity.getBody());
     try {
-      ResponseEntity<String> responseEntity = rest.exchange(server + "2019", HttpMethod.POST, requestEntity, String.class);
+      ResponseEntity<String> responseEntity = rest.exchange(server, HttpMethod.POST, requestEntity, String.class);
       this.setStatus(responseEntity.getStatusCode());
       return responseEntity.getBody();
     } catch (HttpServerErrorException | HttpClientErrorException e) {
