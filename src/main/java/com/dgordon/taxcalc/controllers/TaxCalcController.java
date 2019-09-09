@@ -13,7 +13,6 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.logging.Logger;
 
-
 import javax.json.*;
 
 @RestController

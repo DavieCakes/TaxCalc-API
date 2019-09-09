@@ -24,16 +24,11 @@ public class RestClient {
     this.rest = new RestTemplate();
     this.headers = new HttpHeaders();
     headers.add("Content-Type", "application/json");
-    // headers.add("Content-Type", "application/x-www-form-urlencoded");
-    // headers.add("Accept", "*/*");
     headers.add("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUElfS0VZX01BTkFHRVIiLCJodHRwOi8vdGF4ZWUuaW8vdXNlcl9pZCI6IjVkNzJmNGY3NDRmMzYwMWEyODMwYjJhYiIsImh0dHA6Ly90YXhlZS5pby9zY29wZXMiOlsiYXBpIl0sImlhdCI6MTU2NzgxNDkwM30.FiVjGqO_HrHtODYLUBqbtnQm48sVxGPYRyTrzWSobks");
   }
 
   public String post(String body) {
-    
-    LOG.info( (new StringBuilder()).append("recieved request data: ").append(body).toString() );
     HttpEntity<String> requestEntity = new HttpEntity<String>(body, headers);
-    LOG.info(requestEntity.getBody());
     try {
       ResponseEntity<String> responseEntity = rest.exchange(server, HttpMethod.POST, requestEntity, String.class);
       this.setStatus(responseEntity.getStatusCode());
@@ -43,7 +38,6 @@ public class RestClient {
       LOG.severe(e.getResponseBodyAsString());
       LOG.severe(e.getResponseHeaders().toString());
       LOG.severe(requestEntity.toString());
-
     }
     return "";
   }
