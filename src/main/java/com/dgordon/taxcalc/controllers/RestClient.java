@@ -24,7 +24,7 @@ public class RestClient {
     this.rest = new RestTemplate();
     this.headers = new HttpHeaders();
     headers.add("Content-Type", "application/json");
-    headers.add("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUElfS0VZX01BTkFHRVIiLCJodHRwOi8vdGF4ZWUuaW8vdXNlcl9pZCI6IjVkNzJmNGY3NDRmMzYwMWEyODMwYjJhYiIsImh0dHA6Ly90YXhlZS5pby9zY29wZXMiOlsiYXBpIl0sImlhdCI6MTU2NzgxNDkwM30.FiVjGqO_HrHtODYLUBqbtnQm48sVxGPYRyTrzWSobks");
+    // api key //
   }
 
   public String post(String body) {
